@@ -1,6 +1,8 @@
 package org.lql.iocannotation.pojo;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,10 +15,12 @@ import org.springframework.stereotype.Component;
  * @since: 2021/6/1 14:24 <br>
  */
 @Component
+//@PropertySource({"classpath:application.properties"})
+//@ConfigurationProperties("database")
 public class DataBaseProperties {
 
-    @Value("${database.driver}")
-    private String driverName = null;
+    @Value("${database.driverName}")
+    private String driverName;
 
     @Value("${database.url}")
     private String url;
