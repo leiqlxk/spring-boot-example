@@ -2,10 +2,13 @@ package org.lql.iocannotation.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
+import org.lql.iocannotation.condition.DatabaseConditional;
 import org.lql.iocannotation.domain.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
@@ -37,15 +40,16 @@ public class AppConfig {
         return user;
     }
 
-    // 自定义第三方bean
-    @Bean(name = "dataSource")
-//    @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
-    public DataSource getDataSource() {
+    //    @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
+    @Bean(name = "dataSource", destroyMethod = "close")
+    @Conditional(DatabaseConditional.class)
+    public DataSource getDataSource(@Value("${database.driverName}") String driverName, @Value("${url}") String url,
+                                    @Value("${userName}") String userName, @Value("${password}") String password) {
         Properties properties = new Properties();
-        properties.setProperty("driver", "com.mysql.jdbc.Driver");
-        properties.setProperty("url", "jdbc:mysql://120.78.21.146:3306/sampledb");
-        properties.setProperty("username", "root");
-        properties.setProperty("password", "Zh@123456");
+        properties.setProperty("driver", driverName);
+        properties.setProperty("url", url);
+        properties.setProperty("username", userName);
+        properties.setProperty("password", password);
 
         DataSource dataSource = null;
 
@@ -57,4 +61,5 @@ public class AppConfig {
 
         return dataSource;
     }
+    // 自定义第三方bean
 }
