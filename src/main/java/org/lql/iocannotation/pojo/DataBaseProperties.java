@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
  * @since: 2021/6/1 14:24 <br>
  */
 @Component
+// 指定自定义配置文件
 //@PropertySource({"classpath:application.properties"})
+// 根据注解中的字符串database与pojo中的属性名称组成属性的全限定名去配置文件中查找，此时无需在每个属性上使用@Value
 //@ConfigurationProperties("database")
 public class DataBaseProperties {
 
