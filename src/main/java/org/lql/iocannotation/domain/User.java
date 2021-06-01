@@ -1,0 +1,45 @@
+package org.lql.iocannotation.domain;
+
+import java.io.Serializable;
+
+/**
+ * Title: User <br>
+ * ProjectName: spring-boot-example <br>
+ * description: TODO <br>
+ *
+ * @author: leiql <br>
+ * @version: 1.0 <br>
+ * @since: 2021/6/1 10:42 <br>
+ */
+public class User implements Serializable {
+
+    private Long id;
+
+    private String userName;
+
+    private String note;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+}
