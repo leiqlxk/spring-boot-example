@@ -1,7 +1,9 @@
 package org.lql;
 
+import org.lql.aop.aspect.MyAspect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Title: SpringBootApplication <br>
@@ -14,6 +16,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class AppSpringBootApplication {
+
+    @Bean(name="myAspect")
+    public MyAspect initMyAspect() {
+        return new MyAspect();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(AppSpringBootApplication.class);
