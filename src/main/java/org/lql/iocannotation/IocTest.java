@@ -1,11 +1,10 @@
 package org.lql.iocannotation;
 
 import org.lql.iocannotation.config.AppConfig;
-import org.lql.iocannotation.pojo.DataBaseProperties;
+import org.lql.iocannotation.domain.SpelExpressionTest;
+import org.lql.iocannotation.pojo.*;
 import org.lql.iocannotation.domain.User;
 import org.lql.iocannotation.domain.User1;
-import org.lql.iocannotation.pojo.BusinessPerson;
-import org.lql.iocannotation.pojo.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -37,12 +36,15 @@ public class IocTest {
         person.service();
         person.allService();
 
-        DataBaseProperties properties = ctx.getBean(DataBaseProperties.class);
-        System.out.println(properties.getDriverName());
-        System.out.println(properties.getUrl());
-        System.out.println(properties.getUserName());
-        System.out.println(properties.getPassword());
+        ScopeBean scopeBean1 = ctx.getBean(ScopeBean.class);
+        ScopeBean scopeBean2 = ctx.getBean(ScopeBean.class);
+        System.out.println(scopeBean1 == scopeBean2);
 
+        Animal animal = ctx.getBean("squirrel", Animal.class);
+        animal.use();
+
+        SpelExpressionTest spelExpression = ctx.getBean(SpelExpressionTest.class);
+        System.out.println(spelExpression);
         ctx.close() ;
     }
 }

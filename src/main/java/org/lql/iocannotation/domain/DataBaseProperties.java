@@ -1,4 +1,4 @@
-package org.lql.iocannotation.pojo;
+package org.lql.iocannotation.domain;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,19 +18,19 @@ import org.springframework.stereotype.Component;
 // 指定自定义配置文件
 //@PropertySource({"classpath:application.properties"})
 // 根据注解中的字符串database与pojo中的属性名称组成属性的全限定名去配置文件中查找，此时无需在每个属性上使用@Value
-//@ConfigurationProperties("database")
+@ConfigurationProperties("database")
 public class DataBaseProperties {
 
-    @Value("${database.driverName}")
+//    @Value("${database.driverName}")
     private String driverName;
 
-    @Value("${database.url}")
+//    @Value("${database.url}")
     private String url;
 
-    @Value("${database.username}")
+//    @Value("${database.username}")
     private String userName;
 
-    @Value("${database.password}")
+//    @Value("${database.password}")
     private String password;
 
     public String getDriverName() {

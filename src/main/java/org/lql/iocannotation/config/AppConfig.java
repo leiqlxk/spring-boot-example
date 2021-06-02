@@ -6,10 +6,7 @@ import org.lql.iocannotation.condition.DatabaseConditional;
 import org.lql.iocannotation.domain.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -28,6 +25,7 @@ import java.util.Properties;
 @Configuration
 // 此注解开启扫描，但默认只会扫描当前包及其子包
 @ComponentScan(basePackages = "org.lql.iocannotation.*", excludeFilters = {@ComponentScan.Filter(classes = {Service.class})})
+@ImportResource(value = {"classpath:spring-other.xml"})
 public class AppConfig {
 
     // 此注解代表将方法返回的POJO装配到IOC容器中，其属性name定义这个bean的名称，如果没有配置则将方法名称initUser作为bean的名称保存到IOC容器中
@@ -42,9 +40,12 @@ public class AppConfig {
 
     //    @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
     @Bean(name = "dataSource", destroyMethod = "close")
+    // 指定装配条件
     @Conditional(DatabaseConditional.class)
-    public DataSource getDataSource(@Value("${database.driverName}") String driverName, @Value("${url}") String url,
-                                    @Value("${userName}") String userName, @Value("${password}") String password) {
+    // 指定profile文件，如果有dev配置文件就实例化，没有就不实例化
+    @Profile("dev")
+    public DataSource getDataSource(@Value("${database.driverName}") String driverName, @Value("${database.url}") String url,
+                                    @Value("${database.userName}") String userName, @Value("${database.password}") String password) {
         Properties properties = new Properties();
         properties.setProperty("driver", driverName);
         properties.setProperty("url", url);
