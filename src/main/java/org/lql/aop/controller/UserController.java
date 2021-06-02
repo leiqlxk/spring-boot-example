@@ -1,5 +1,6 @@
 package org.lql.aop.controller;
 
+import org.lql.aop.advice.UserValidator;
 import org.lql.aop.domain.User;
 import org.lql.aop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,13 @@ public class UserController {
         user.setNote(note);
         userService.printUser(user);
 
+        user = null;
+        // 强制转换
+        UserValidator userValidator = (UserValidator) userService;
+        //验证是否为空
+        if (userValidator.validate(user)) {
+            userService.printUser(user);
+        }
         return user;
     }
 }

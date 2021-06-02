@@ -17,11 +17,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class AppSpringBootApplication {
 
-    @Bean(name="myAspect")
-    public MyAspect initMyAspect() {
-        return new MyAspect();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(AppSpringBootApplication.class);
     }

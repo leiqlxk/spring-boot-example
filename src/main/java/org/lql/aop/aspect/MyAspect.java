@@ -1,7 +1,12 @@
 package org.lql.aop.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.lql.aop.advice.UserValidator;
+import org.lql.aop.advice.UserValidatorImpl;
+import org.lql.aop.domain.User;
+import org.springframework.stereotype.Component;
 
 /**
  * Title: MyAspect <br>
@@ -14,7 +19,11 @@ import org.aspectj.lang.annotation.*;
  */
 // 切面声明
 @Aspect
+@Component
 public class MyAspect {
+
+    @DeclareParents(value = "org.lql.aop.service.UserServiceImpl+", defaultImpl = UserValidatorImpl.class)
+    public UserValidator userValidator;
 
     // 定义切点
     @Pointcut("execution(* org.lql.aop.service.UserServiceImpl.printUser(..))")
@@ -22,8 +31,10 @@ public class MyAspect {
     }
 
     // 定义切面
-    @Before("pointCut()")
-    public void before() {
+    @Before("pointCut() && args(user)")
+    public void before(JoinPoint joinPoint, User user) {
+        Object[] objects = joinPoint.getArgs();
+        System.out.println("objects:" + objects);
         System.out.println("before.....");
     }
 
