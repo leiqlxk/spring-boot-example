@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lql.database.mybatis.mybatisdao.MyBatisUserDao">
+    <!--  resultType可使用别名也可使用全限定名，此时为指定映射关系，在默认情况下mybatis会启动自动映射，列名和实体类属性一一对应，也可以开启驼峰映射来让user_name可以不要写别名  -->
+    <select id="getUser" parameterType="long" resultType="user">
+        select id, user_name as userName, sex, note from t_user_boot where id = #{id}
+    </select>
+</mapper>

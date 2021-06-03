@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyAspect {
 
-    @DeclareParents(value = "org.lql.aop.service.UserServiceImpl+", defaultImpl = UserValidatorImpl.class)
+    @DeclareParents(value = "org.lql.aop.service.UserServiceImpl", defaultImpl = UserValidatorImpl.class)
     public UserValidator userValidator;
 
     // 定义切点

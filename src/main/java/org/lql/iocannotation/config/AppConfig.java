@@ -38,13 +38,14 @@ public class AppConfig {
         return user;
     }
 
+    // 自定义第三方bean
     //    @Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
-    @Bean(name = "dataSource", destroyMethod = "close")
+//    @Bean(name = "dataSource1", destroyMethod = "close")
     // 指定装配条件
-    @Conditional(DatabaseConditional.class)
+//    @Conditional(DatabaseConditional.class)
     // 指定profile文件，如果有dev配置文件就实例化，没有就不实例化
-    @Profile("dev")
-    public DataSource getDataSource(@Value("${database.driverName}") String driverName, @Value("${database.url}") String url,
+//    @Profile("dev")
+    /*public DataSource getDataSource(@Value("${database.driverName}") String driverName, @Value("${database.url}") String url,
                                     @Value("${database.userName}") String userName, @Value("${database.password}") String password) {
         Properties properties = new Properties();
         properties.setProperty("driver", driverName);
@@ -61,6 +62,5 @@ public class AppConfig {
         }
 
         return dataSource;
-    }
-    // 自定义第三方bean
+    }*/
 }
