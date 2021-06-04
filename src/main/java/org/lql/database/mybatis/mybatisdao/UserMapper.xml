@@ -7,4 +7,8 @@
     <select id="getUser" parameterType="long" resultType="user">
         select id, user_name as userName, sex, note from t_user_boot where id = #{id}
     </select>
+
+    <insert id="insertUser">
+        insert into t_user_boot(user_name, note) values (#{userName}, #{note})
+    </insert>
 </mapper>

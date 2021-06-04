@@ -35,7 +35,8 @@ public class JdbcTmplUserServiceImpl implements JdbcTmplUserService {
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, getUserMapper());
     }
 
-    // jdbcTemplate每执行一次sql操作都会从数据源获取一条连接，执行完后会关闭连接，如果我们想多个操作在同一个连接中完成可以是用StatementCallback或者ConnectionCallback接口实现回调
+    // jdbcTemplate每执行一次sql操作都会从数据源获取一条连接，执行完后会关闭连接，
+    // 如果我们想多个操作在同一个连接中完成可以是用StatementCallback或者ConnectionCallback接口实现回调
     @Override
     public User getUser2(Long id) {
         User result = this.jdbcTemplate.execute((Statement stmt) -> {

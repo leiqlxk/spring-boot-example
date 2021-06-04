@@ -5,19 +5,15 @@ import org.lql.database.mybatis.mybatisdomain.User;
 import java.util.List;
 
 /**
- * Title: MybatisUserService <br>
+ * Title: UserBatchService <br>
  * ProjectName: spring-boot-example <br>
  * description: TODO <br>
  *
  * @author: leiql <br>
  * @version: 1.0 <br>
- * @since: 2021/6/3 14:14 <br>
+ * @since: 2021/6/4 14:37 <br>
  */
-public interface MybatisUserService {
-
-    User getUser(Long id);
-
-    int insertUser(User user);
+public interface UserBatchService {
 
     int insertUsers(List<User> users);
 }

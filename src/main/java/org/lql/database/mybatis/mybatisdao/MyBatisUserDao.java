@@ -17,4 +17,5 @@ public interface MyBatisUserDao {
 
     public User getUser(Long id);
 
+    int insertUser(User user);
 }
