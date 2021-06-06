@@ -6,8 +6,11 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
+import java.io.Serializable;
 
 /**
  * Title: RedisConfig <br>
@@ -49,6 +52,16 @@ public class RedisConfig {
     @Bean(name = "redisTemplate")
     public RedisTemplate<Object, Object> initRedisTemplate() {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<Object, Object>();
+
+        // redisTemplate会自动初始化StringRedisSerializer
+        RedisSerializer redisSerializer = redisTemplate.getStringSerializer();
+        // 设置字符串序列化器
+        redisTemplate.setKeySerializer(redisSerializer);
+        redisTemplate.setKeySerializer(redisSerializer);
+        redisTemplate.setValueSerializer(redisSerializer);
+        redisTemplate.setHashKeySerializer(redisSerializer);
+        redisTemplate.setHashValueSerializer(redisSerializer);
+
         redisTemplate.setConnectionFactory(initRedisConnectionFactory());
 
         return redisTemplate;
