@@ -21,12 +21,12 @@ import java.io.Serializable;
  * @version: 1.0 <br>
  * @since: 2021/6/4 15:47 <br>
  */
-@Configuration
+//@Configuration
 public class RedisConfig {
 
     private RedisConnectionFactory redisConnectionFactory = null;
 
-    @Bean
+//    @Bean
     public RedisConnectionFactory initRedisConnectionFactory() {
         if (this.redisConnectionFactory != null) {
             return this.redisConnectionFactory;
@@ -49,7 +49,7 @@ public class RedisConfig {
         return jedisConnectionFactory;
     }
 
-    @Bean(name = "redisTemplate")
+//    @Bean(name = "redisTemplate")
     public RedisTemplate<Object, Object> initRedisTemplate() {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<Object, Object>();
 
