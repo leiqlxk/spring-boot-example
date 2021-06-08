@@ -31,7 +31,7 @@ public class MybatisUserServiceImpl implements MybatisUserService {
 
     @Override
 //    @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 1)
-    @Cacheable(value = "redisCache", key = "'redis_user_' + #id")
+//    @Cacheable(value = "redisCache", key = "'redis_user_' + #id")
     public User getUser(Long id) {
         return myBatisUserDao.getUser(id);
     }
@@ -40,7 +40,7 @@ public class MybatisUserServiceImpl implements MybatisUserService {
     // 声明式事务
 //    @Transactional(isolation = Isolation.READ_COMMITTED, timeout = 1)
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    @CachePut(value = "redisCache", key = "'redis_user_' + #result.id")
+//    @CachePut(value = "redisCache", key = "'redis_user_' + #result.id")
     public int insertUser(User user) {
         return myBatisUserDao.insertUser(user);
     }
@@ -56,7 +56,7 @@ public class MybatisUserServiceImpl implements MybatisUserService {
     }
 
 //    @CacheEvict(value = "redisCache", key = "'redis_user_' + #id", beforeInvocation = false)
-    @CachePut(value = "redisCache",condition="#result != 'null'" , key = "'redis_user_' + #id")
+//    @CachePut(value = "redisCache",condition="#result != 'null'" , key = "'redis_user_' + #id")
     public User updateUserName(Long id, String userName) {
         return new User();
     }

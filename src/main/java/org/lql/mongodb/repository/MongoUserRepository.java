@@ -1,8 +1,6 @@
 package org.lql.mongodb.repository;
 
 import org.lql.mongodb.domain.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,8 +14,9 @@ import java.util.List;
  * @version: 1.0 <br>
  * @since: 2021/6/8 15:27 <br>
  */
-@Repository
-public interface MongoUserRepository extends MongoRepository<User, Long> {
+//@Repository
+//public interface MongoUserRepository extends MongoRepository<User, Long> {
+public interface MongoUserRepository {
 
     /**
      * description: 符合JPA规范命名方法，则不需要再实现该方法也可用 <br>
@@ -30,7 +29,7 @@ public interface MongoUserRepository extends MongoRepository<User, Long> {
      * @param userName
      * @return java.util.List<org.lql.mongodb.domain.User>
      */ 
-    List<User> findByUserNameLike(String userName);
+//    List<User> findByUserNameLike(String userName);
 
     /**
      * description: 自定义查询 <br>
@@ -44,6 +43,6 @@ public interface MongoUserRepository extends MongoRepository<User, Long> {
      * @param userName
      * @return org.lql.mongodb.domain.User
      */
-    @Query("{'id': ?0, 'userName': ?1}")
-    User find(Long id, String userName);
+   /* @Query("{'id': ?0, 'userName': ?1}")
+    User find(Long id, String userName);*/
 }

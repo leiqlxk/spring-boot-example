@@ -1,8 +1,6 @@
 package org.lql.mongodb.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
  * @since: 2021/6/8 14:32 <br>
  */
 // 标识为MongoDB文档
-@Document
+//@Document
 public class User implements Serializable {
 
     // MongoDB文档编号， 主键
@@ -25,7 +23,7 @@ public class User implements Serializable {
     private Long id;
 
     // 在MongoDB中使用user_name保存属性
-    @Field("user_name")
+//    @Field("user_name")
     private String userName;
 
     private String note;

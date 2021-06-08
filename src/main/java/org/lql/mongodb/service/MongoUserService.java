@@ -1,7 +1,6 @@
 package org.lql.mongodb.service;
 
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
+import com.mysql.cj.xdevapi.UpdateResult;
 import org.lql.mongodb.domain.User;
 
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public interface MongoUserService {
 
-    public void saveUser(User user);
+   /* public void saveUser(User user);
 
     public DeleteResult deleteUser(Long id);
 
@@ -25,5 +24,5 @@ public interface MongoUserService {
 
     public UpdateResult updateUser(Long id, String userName, String note);
 
-    public User getUser(Long id);
+    public User getUser(Long id);*/
 }

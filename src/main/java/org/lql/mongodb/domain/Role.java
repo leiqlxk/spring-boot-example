@@ -1,7 +1,5 @@
 package org.lql.mongodb.domain;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 
@@ -14,11 +12,11 @@ import java.io.Serializable;
  * @version: 1.0 <br>
  * @since: 2021/6/8 14:36 <br>
  */
-@Document
+//@Document
 public class Role implements Serializable {
     private Long id;
 
-    @Field("role_name")
+//    @Field("role_name")
     private String roleName;
 
     private String note;

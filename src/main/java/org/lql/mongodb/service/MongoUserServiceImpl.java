@@ -1,13 +1,5 @@
 package org.lql.mongodb.service;
 
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
-import org.lql.mongodb.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +16,7 @@ import java.util.List;
 @Service
 public class MongoUserServiceImpl implements MongoUserService {
 
-    @Autowired
+    /*@Autowired
     private MongoTemplate mongoTemplate;
 
     @Override
@@ -76,5 +68,5 @@ public class MongoUserServiceImpl implements MongoUserService {
     @Override
     public User getUser(Long id) {
         return mongoTemplate.findById(id, User.class);
-    }
+    }*/
 }
