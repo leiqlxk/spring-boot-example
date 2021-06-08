@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisZSetCommands;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
@@ -214,6 +215,31 @@ public class RedisController {
         });
 
         System.out.println(list);
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+
+        return map;
+    }
+
+    @RequestMapping("/pipeline")
+    @ResponseBody
+    public Map<String, Object> testPipeline() {
+
+        Long start = System.currentTimeMillis();
+        List list = (List) redisTemplate.executePipelined((RedisOperations operations) -> {
+           for (int i = 1; i <= 100000; i++) {
+               operations.opsForValue().set("pipeline_" + i, "value_" + i);
+               String value = (String) operations.opsForValue().get("pipeline_" + i);
+               if (i == 100000) {
+                   System.out.println("命令指示进入队列，所以值为空【" + value + "】");
+               }
+           }
+
+           return null;
+        });
+
+        Long end = System.currentTimeMillis();
+        System.out.println("耗时：" + (end - start) + "毫秒");
         Map<String, Object> map = new HashMap<>();
         map.put("success", true);
 
