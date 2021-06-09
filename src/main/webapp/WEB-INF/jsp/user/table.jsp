@@ -21,7 +21,6 @@
                   console.log(result);
                 }
               })
-
             }
         </script>
     </head>
