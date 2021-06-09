@@ -6,7 +6,11 @@ import org.lql.springmvc.service.MvcUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Title: UserController <br>
@@ -38,4 +42,22 @@ public class MvcUserController {
     }
 
 
+    @RequestMapping("/table")
+    public ModelAndView table() {
+        List<User> userList = userService.findUsers(null, null);
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("user/table");
+        mv.addObject("userList", userList);
+
+        return mv;
+    }
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public List<User> list(@RequestParam(value = "userName", required = false) String userName, @RequestParam(value = "note", required = false) String note) {
+        List<User> userList = userService.findUsers(userName, note);
+
+        return userList;
+    }
 }

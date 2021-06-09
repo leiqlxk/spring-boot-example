@@ -11,4 +11,17 @@
     <insert id="insertUser">
         insert into t_user_boot(user_name, note) values (#{userName}, #{note})
     </insert>
+
+    <resultMap id="UserResult" type="user">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="note" column="note"/>
+    </resultMap>
+    <select id="findUsers" resultMap="UserResult">
+        select id, user_name, note from t_user_boot
+        <where>
+            <if test="userName != null and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
+            <if test="note != null and note != ''">and note like concat('%', #{note}, '%')</if>
+        </where>
+    </select>
 </mapper>

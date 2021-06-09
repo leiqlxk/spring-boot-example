@@ -1,7 +1,10 @@
 package org.lql.database.mybatis.mybatisdao;
 
+import org.apache.ibatis.annotations.Param;
 import org.lql.database.mybatis.mybatisdomain.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Title: MyBatisUserDao <br>
@@ -18,4 +21,6 @@ public interface MyBatisUserDao {
     public User getUser(Long id);
 
     int insertUser(User user);
+
+    List<User> findUsers(@Param("userName") String userName, @Param("note") String note);
 }

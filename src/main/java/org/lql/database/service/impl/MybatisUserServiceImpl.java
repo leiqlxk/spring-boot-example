@@ -55,7 +55,12 @@ public class MybatisUserServiceImpl implements MybatisUserService {
         return count;
     }
 
-//    @CacheEvict(value = "redisCache", key = "'redis_user_' + #id", beforeInvocation = false)
+    @Override
+    public List<User> findUsers(String userName, String note) {
+        return myBatisUserDao.findUsers(userName, note);
+    }
+
+    //    @CacheEvict(value = "redisCache", key = "'redis_user_' + #id", beforeInvocation = false)
 //    @CachePut(value = "redisCache",condition="#result != 'null'" , key = "'redis_user_' + #id")
     public User updateUserName(Long id, String userName) {
         return new User();

@@ -20,4 +20,6 @@ public interface MybatisUserService {
     int insertUser(User user);
 
     int insertUsers(List<User> users);
+
+    List<User> findUsers(String userName, String note);
 }
