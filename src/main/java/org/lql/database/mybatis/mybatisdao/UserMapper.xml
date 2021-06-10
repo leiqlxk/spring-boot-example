@@ -8,20 +8,29 @@
         select id, user_name as userName, sex, note from t_user_boot where id = #{id}
     </select>
 
-    <insert id="insertUser">
-        insert into t_user_boot(user_name, note) values (#{userName}, #{note})
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_boot(user_name, sex, note) values (#{userName}, #{sex.id}, #{note})
     </insert>
 
     <resultMap id="UserResult" type="user">
         <result property="id" column="id"/>
         <result property="userName" column="user_name"/>
         <result property="note" column="note"/>
+        <result property="sex" column="sex" typeHandler="org.lql.database.enumeration.SexTypeHandler"/>
     </resultMap>
     <select id="findUsers" resultMap="UserResult">
-        select id, user_name, note from t_user_boot
+        select id, sex, user_name, note from t_user_boot
         <where>
             <if test="userName != null and userName != ''">and user_name like concat('%', #{userName}, '%')</if>
             <if test="note != null and note != ''">and note like concat('%', #{note}, '%')</if>
         </where>
     </select>
+
+    <update id="updateUser">
+        update t_user_boot set note = #{note} where id = #{id}
+    </update>
+
+    <delete id="deletUser">
+        delete from t_user_boot where id = #{id}
+    </delete>
 </mapper>

@@ -23,4 +23,8 @@ public interface MyBatisUserDao {
     int insertUser(User user);
 
     List<User> findUsers(@Param("userName") String userName, @Param("note") String note);
+
+    void updateUser(User user);
+
+    int deletUser(Long id);
 }

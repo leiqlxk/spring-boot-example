@@ -22,4 +22,8 @@ public interface MybatisUserService {
     int insertUsers(List<User> users);
 
     List<User> findUsers(String userName, String note);
+
+    void updateUser(User user);
+
+    int deleteUser(Long id);
 }

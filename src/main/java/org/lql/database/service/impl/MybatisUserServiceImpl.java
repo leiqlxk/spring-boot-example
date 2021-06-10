@@ -56,6 +56,16 @@ public class MybatisUserServiceImpl implements MybatisUserService {
     }
 
     @Override
+    public void updateUser(User user) {
+        myBatisUserDao.updateUser(user);
+    }
+
+    @Override
+    public int deleteUser(Long id) {
+        return myBatisUserDao.deletUser(id);
+    }
+
+    @Override
     public List<User> findUsers(String userName, String note) {
         return myBatisUserDao.findUsers(userName, note);
     }
