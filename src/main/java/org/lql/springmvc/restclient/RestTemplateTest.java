@@ -48,6 +48,12 @@ public class RestTemplateTest {
         ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class, map);
         List<UserVo> userVos = responseEntity.getBody();
 
+        // 获取响应头
+        HttpHeaders headers = responseEntity.getHeaders();
+        // 获取响应属性
+        List<String> success = headers.get("success");
+        // 响应的HTTP状态码
+        int status = responseEntity.getStatusCodeValue();
         return userVos;
     }
 
