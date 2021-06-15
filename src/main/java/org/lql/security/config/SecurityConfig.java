@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
@@ -24,7 +26,7 @@ import javax.sql.DataSource;
  * @since: 2021/6/11 10:57 <br>
  */
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
     private DataSource dataSource;
@@ -122,7 +124,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // 只需要通过验证就可以访问所有的请求
         // authorizeRequests 方法限定只对签名成功的用户请求，过滤请求
-        http.authorizeRequests()
+       /* http.authorizeRequests()
                 // anyRequest 方法限定所有请求
                 .anyRequest()
                 // authenticated 方法对所有签名成功的用户允许方法
@@ -130,7 +132,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // and 方法是连接词 ， formLogin 代表使用 Spring Security 默认的登录界面
                 .and().formLogin()
                 // httpBasic 方法说明启用 HTTP 基础认证
-                .and().httpBasic();
+                .and().httpBasic();*/
+       http.
+               // CSRF禁用，因为不使用session
+               csrf().disable().authorizeRequests()
+               // ant风格，限定请求赋予角色ROLE_USER或者ROLE_ADMIN
+               .antMatchers("/user/welcome", "/user/details").hasAnyRole("USER", "ADMIN")
+               // 限定"/admin/"下所有请求权限赋予角色ROLE_ADMIN
+               .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+               // 其他路径允许签名后访问
+               .anyRequest().permitAll()
+               // 也允许使用正则
+//               .regexMatchers()
+               // 对于没有配置权限的其他请求运行匿名访问
+               .and().anonymous()
+               .and().formLogin().loginPage("/login/page").defaultSuccessUrl("/admin/welcome1")
+               .and().httpBasic()
+               // 启用remember me功能，有效期为1天，浏览器将使用cookie以键remember-me-key进行保存，在保存之前会以MD5加密
+                .and().rememberMe().tokenValiditySeconds(86400).key("remember-me-key");
+    }
+
+    // 使用mvc配置新增登录页及退出的映射关系
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        // 使得/login/page映射到login.jsp页面
+        registry.addViewController("/login/page").setViewName("login");
+        // 映射为logout_welcome.jsp
+        registry.addViewController("/logout/page").setViewName("logout_welcome");
+        registry.addViewController("/logout").setViewName("logout");
     }
 
     public static void main(String[] args) {
