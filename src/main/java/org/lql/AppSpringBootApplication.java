@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -44,6 +45,8 @@ import java.util.List;
 @EnableCaching
 // 指定扫描的包，用于扫描继承了MongoRepository的接口
 //@EnableMongoRepositories(basePackages = "org.lql.mongodb.repository")
+// 启用定时任务
+@EnableScheduling
 public class AppSpringBootApplication {
 
     @Autowired
